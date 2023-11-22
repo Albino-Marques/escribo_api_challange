@@ -77,20 +77,50 @@ app.post('/auth/signup',async (req,res) => {
     const salt = await bcrypt.genSalt(12)
     const passwordHash = await bcrypt.hash(password, salt)
 
-    const user = new User({
-        name,
-        email, 
-        password:passwordHash,
-        telefones
-    })
+    const currentDate = new Date();
 
-    try{
-        await user.save()
+    const user = new User({
+      name,
+      email,
+      password: passwordHash,
+      telefones,
+      data_criacao: currentDate,
+      data_atualizacao: currentDate,
+      ultimo_login: null  
+    });
+
+    // try{
+    //     await user.save()
         
-        res.status(201).json({msg: "Usuário criado com sucesso!", })
-    }catch(error){
-        console.log(error)
-        res.status(500).json({msg: "Aconteceu um erro inesperado. Tente novamente mais tarde!"})
+    //     res.status(201).json({msg: "Usuário criado com sucesso!", })
+    // }catch(error){
+    //     console.log(error)
+    //     res.status(500).json({msg: "Aconteceu um erro inesperado. Tente novamente mais tarde!"})
+    // }
+
+    try {
+      await user.save();
+  
+
+      const secret = process.env.JWT_SECRET;
+      const token = jwt.sign({
+        id: user._id
+      }, secret);
+      
+    user.ultimo_login = currentDate;
+    await user.save();
+
+      res.status(201).json({
+        msg: "Usuário criado com sucesso!",
+        id: user._id,
+      data_criacao: user.data_criacao,
+      data_atualizacao: user.data_atualizacao,
+      ultimo_login: user.ultimo_login,
+      token 
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ msg: "Aconteceu um erro inesperado. Tente novamente mais tarde!" });
     }
 })
 
