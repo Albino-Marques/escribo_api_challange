@@ -23,7 +23,14 @@ app.get('/user/:id', checkToken ,async (req, res) => {
     return res.status(404).json({msg: "Usuário não encontrado!"})
   }
 
-  res.status(200).json({user})
+  user.atualizarUltimoLogin()
+  try {
+      res.status(200).json({user})
+  }catch (error){
+    res.status(400)
+  }
+
+
 
 })
 
@@ -89,14 +96,6 @@ app.post('/auth/signup',async (req,res) => {
       ultimo_login: null  
     });
 
-    // try{
-    //     await user.save()
-        
-    //     res.status(201).json({msg: "Usuário criado com sucesso!", })
-    // }catch(error){
-    //     console.log(error)
-    //     res.status(500).json({msg: "Aconteceu um erro inesperado. Tente novamente mais tarde!"})
-    // }
 
     try {
       await user.save();
