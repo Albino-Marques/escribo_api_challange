@@ -9,7 +9,10 @@ const app = express()
 app.use(express.json())
 
 connectDB().then(() => {
-  app.listen(3000)
+  app.listen({
+    host:'0.0.0.0',
+    port: process.env.PORT ? Number(process.env.PORT) : 3333,
+  })
 })
 .catch((err) => {
   console.log(err)
@@ -35,24 +38,3 @@ app.get('/user/:id', checkToken, async (req, res) => {
 
   res.status(200).json({ msg: 'Usuário já autenticado!' })
 })
-
-
-
-
-
-
-
-// const dbUser = process.env.DB_USER
-// const dbPassword = process.env.DB_PASS
-
-// mongoose
-//   .connect(
-//     `mongodb+srv://${dbUser}:${dbPassword}@cluster0.ypjpopk.mongodb.net/?retryWrites=true&w=majority`,
-//   )
-//   .then(() => {
-//     app.listen(3000)
-//     console.log('Conectou ao banco')
-//   })
-//   .catch((err) => {
-//     console.log(err)
-//   })

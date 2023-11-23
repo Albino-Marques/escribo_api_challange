@@ -19,7 +19,8 @@ function checkToken(req, res, next) {
   
       next()
     } catch (error) {
-      res.status(401).json({ msg: 'Não autorizado' })
+      console.log(error)
+      res.status(401).json({ msg: 'Não autorizado'})
     }
   }
 
