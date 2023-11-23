@@ -34,15 +34,12 @@ const userSchema = new Schema({
     ],
     data_criacao: {
         type: String,
-        // default: Date.now,
     },
     data_atualizacao: {
         type: String,
-        // default: Date.now,
     },
     ultimo_login: {
         type: String,
-        // default: null,
     },
 });
 
@@ -62,6 +59,8 @@ userSchema.set('toObject', {
         return ret;
     },
 });
+
+
 
 const User = mongoose.model('User', userSchema);
 
