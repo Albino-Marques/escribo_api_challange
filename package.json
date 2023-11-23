@@ -7,12 +7,27 @@
     "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^6.0.0",
     "intl": "^1.2.5",
     "jsonwebtoken": "^9.0.2",
     "luxon": "^3.4.4",
-    "mongoose": "^8.0.1"
+    "mongoose": "^8.0.1",
+    "package.json": "^0.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "@rocketseat/eslint-config": "^2.1.0",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-n": "^15.2.0",
+    "eslint-plugin-prettier": "5.0.0-alpha.2",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.0"
   }
 }
